@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "coming soon...",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "dotcom-tool-kit test:local",
+    "build": "dotcom-tool-kit build:local",
+    "start": "dotcom-tool-kit run:local",
+    "format": "dotcom-tool-kit format:local"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,33 @@
   "bugs": {
     "url": "https://github.com/Financial-Times/n-myft-dropdown/issues"
   },
-  "homepage": "https://github.com/Financial-Times/n-myft-dropdown#readme"
+  "homepage": "https://github.com/Financial-Times/n-myft-dropdown#readme",
+  "devDependencies": {
+    "@dotcom-tool-kit/circleci": "^2.0.1",
+    "@dotcom-tool-kit/circleci-npm": "^2.0.1",
+    "@dotcom-tool-kit/eslint": "^2.0.1",
+    "@dotcom-tool-kit/lint-staged-npm": "^2.0.2",
+    "@dotcom-tool-kit/prettier": "^2.0.2",
+    "@dotcom-tool-kit/secret-squirrel": "^1.0.0",
+    "@financial-times/eslint-config-next": "^4.0.0",
+    "@financial-times/secret-squirrel": "^2.19.0",
+    "dotcom-tool-kit": "^2.1.1",
+    "eslint-config-prettier": "^8.5.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
+  "lint-staged": {
+    "**/*.js": "dotcom-tool-kit format:staged test:staged --"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "dotcom-tool-kit git:precommit"
+    }
+  },
+  "volta": {
+    "node": "16.14.2",
+    "npm": "8.5.5"
+  }
 }

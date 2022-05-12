@@ -1,0 +1,19 @@
+plugins:
+  - '@dotcom-tool-kit/eslint'
+  - '@dotcom-tool-kit/npm'
+  - '@dotcom-tool-kit/circleci-npm'
+  - '@dotcom-tool-kit/circleci'
+  - '@dotcom-tool-kit/lint-staged-npm'
+  - '@dotcom-tool-kit/prettier'
+  - '@dotcom-tool-kit/secret-squirrel'
+
+hooks:
+  'test:local':
+    - 'Eslint'
+  'test:ci':
+    - 'Eslint'
+  git:precommit:
+    - SecretSquirrel
+    - LintStaged
+
+options: {}
