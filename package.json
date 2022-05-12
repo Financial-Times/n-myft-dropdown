@@ -1,0 +1,19 @@
+{
+  "name": "n-myft-dropdown",
+  "version": "0.0.1",
+  "description": "coming soon...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/n-myft-dropdown.git"
+  },
+  "author": "@Financial-Times/us-growth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/n-myft-dropdown/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/n-myft-dropdown#readme"
+}
