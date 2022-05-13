@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine",
     "test": "dotcom-tool-kit test:local",
     "build": "dotcom-tool-kit build:local",
     "start": "dotcom-tool-kit run:local",
@@ -29,12 +30,13 @@
     "@dotcom-tool-kit/secret-squirrel": "^1.0.0",
     "@financial-times/eslint-config-next": "^4.0.0",
     "@financial-times/secret-squirrel": "^2.19.0",
+    "check-engines": "^1.5.0",
     "dotcom-tool-kit": "^2.1.1",
     "eslint-config-prettier": "^8.5.0"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "14.x || 16.x",
+    "npm": "7.x || 8.x"
   },
   "lint-staged": {
     "**/*.js": "dotcom-tool-kit format:staged test:staged --"
