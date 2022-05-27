@@ -1,15 +1,15 @@
 function attachDropdown() {
-	const dropdownMarkup = `<ul class="n-myft-dropdown-list" onclick="event.stopPropagation()">
-			<li><a href="/myft/following">Topic Feed</a></li>
-			<li><a href="/myft/saved-articles">Saved Articles</a></li>
-			<li><a href="/myft/explore">Explore Feed</a></li>
-			<li><a href="/newsletters">Newsletters</a></li> 
-			<li><a href="/myft/alerts">Contact Preferences</a></li>
+	const dropdownMarkup = `<ul class="n-myft-dropdown-menu" onclick="event.stopPropagation()">
+			<li class="n-myft-dropdown-list"><a href="/myft/following">Topic Feed</a></li>
+			<li class="n-myft-dropdown-list"><a href="/myft/saved-articles">Saved Articles</a></li>
+			<li class="n-myft-dropdown-list"><a href="/myft/explore">Explore Feed</a></li>
+			<li class="n-myft-dropdown-list"><a href="/newsletters">Newsletters</a></li> 
+			<li class="n-myft-dropdown-list"><a href="/myft/alerts">Contact Preferences</a></li>
 		</ul>`;
-	const dropdownMenu = document.createElement('span');
-	dropdownMenu.classList.add('header-top-link-myft-dropdown');
-	dropdownMenu.innerHTML = dropdownMarkup.trim();
-	return dropdownMenu;
+	const dropdown = document.createElement('span');
+	dropdown.classList.add('header-top-link-myft-dropdown');
+	dropdown.innerHTML = dropdownMarkup.trim();
+	return dropdown;
 }
 
 function handleClickOutside() {
@@ -34,11 +34,11 @@ function addEventHandler() {
 				icon.removeChild(childMenu);
 				return;
 			}
-			const myFtDropDownMenu = attachDropdown();
-			icon.appendChild(myFtDropDownMenu);
+			const myFtDropdown = attachDropdown();
+			icon.appendChild(myFtDropdown);
 			event.stopPropagation();
+			document.body.addEventListener('click', handleClickOutside);
 		});
-		document.body.addEventListener('click', handleClickOutside);
 	});
 }
 
