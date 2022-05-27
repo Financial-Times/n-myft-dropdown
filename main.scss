@@ -1,5 +1,19 @@
 @import '@financial-times/o-header/main';
 
+@mixin desktop($px) {
+	@media (min-width: $px) {
+		// to allow the dropdown to line up with the myFT icon
+		.o-header__top-column--right {
+			position: relative;
+		}
+		
+		.header-top-link-myft-dropdown {
+			height: 222px;
+			width: 164px;
+			left: unset;
+		}
+	}
+}
 
 .header-top-link-myft-dropdown {
 	position: absolute;
@@ -58,19 +72,4 @@
 		text-decoration-line: underline;
 		text-decoration-color: rgb(51, 48, 46);
 	}
-}
-
-@media (min-width: 1024px) {
-	// to allow the dropdown to line up with the myFT icon
-	.o-header__top-column--right {
-		position: relative;
-	}
-	
-	.header-top-link-myft-dropdown {
-		height: 222px;
-		width: 164px;
-		left: unset;
-	}
-
-
 }
