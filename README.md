@@ -1,6 +1,6 @@
 # n-myft-dropdown
 
-[![CircleCI](https://circleci.com/gh/Financial-Times/n-myft-dropdown/tree/main.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-myft-dropdown/tree/main)
+[![CircleCI](https://circleci.com/gh/Financial-Times/n-myft-dropdown/tree/main.svg?style=svg&circle-token=c8fadb39490fb006ccb9c3f26b2b05da02c0fcca)](https://circleci.com/gh/Financial-Times/n-myft-dropdown/tree/main)
 
 Client side component to create a dropdown menu from the myFT icon.
 
