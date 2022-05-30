@@ -12,6 +12,15 @@ function attachDropdown() {
 	return dropdown;
 }
 
+function setAriaExpanded(value) {
+	const myFtIcons = document.getElementsByClassName(
+		'o-header__top-link o-header__top-link--myft'
+	);
+	Object.values(myFtIcons).forEach((icon) => {
+		icon.setAttribute('aria-expanded', value);
+	});
+}
+
 function handleClickOutside() {
 	const myFtDropdownMenus = document.querySelectorAll(
 		'.header-top-link-myft-dropdown'
@@ -19,25 +28,28 @@ function handleClickOutside() {
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		menu.remove();
 	});
+	setAriaExpanded('false');
 }
 
 function addEventHandler() {
-	const myFtIcons = document.getElementsByClassName(
+	const topColumnsRight = document.getElementsByClassName(
 		'o-header__top-column o-header__top-column--right'
 	);
 
-	Object.values(myFtIcons).forEach((icon) => {
-		icon.addEventListener('click', function (event) {
+	Object.values(topColumnsRight).forEach((element) => {
+		element.addEventListener('click', function (event) {
 			event.preventDefault();
-			const childMenu = icon.querySelector('.header-top-link-myft-dropdown');
+			const childMenu = element.querySelector('.header-top-link-myft-dropdown');
 			if (childMenu) {
-				icon.removeChild(childMenu);
+				element.removeChild(childMenu);
+				setAriaExpanded('false');
 				return;
 			}
 			const myFtDropdown = attachDropdown();
-			icon.appendChild(myFtDropdown);
+			element.appendChild(myFtDropdown);
 			event.stopPropagation();
 			document.body.addEventListener('click', handleClickOutside);
+			setAriaExpanded('true');
 		});
 	});
 }
