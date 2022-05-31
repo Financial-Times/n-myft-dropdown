@@ -21,14 +21,18 @@ function setAriaExpanded(value) {
 	});
 }
 
-function handleClickOutside() {
+function handleClickOutside(event) {
 	const myFtDropdownMenus = document.querySelectorAll(
 		'.header-top-link-myft-dropdown'
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
-		menu.remove();
+		const inside = menu.contains(event.target);
+		if (!inside) {
+			menu.remove();
+			setAriaExpanded('false');
+			document.body.removeEventListener('click', handleClickOutside);
+		}
 	});
-	setAriaExpanded('false');
 }
 
 function addEventHandler() {
@@ -43,6 +47,7 @@ function addEventHandler() {
 			if (childMenu) {
 				element.removeChild(childMenu);
 				setAriaExpanded('false');
+				document.body.removeEventListener('click', handleClickOutside);
 				return;
 			}
 			const myFtDropdown = attachDropdown();
