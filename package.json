@@ -49,5 +49,9 @@
   "volta": {
     "node": "16.14.2",
     "npm": "8.5.5"
+  },
+  "peerDependencies": {
+    "@financial-times/o-header": "^10.0.1",
+    "@financial-times/o-icons": "^7.4.0"
   }
 }

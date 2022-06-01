@@ -1,11 +1,19 @@
+$system-code: 'n-myft-dropdown';
+
+@import "@financial-times/o-icons/main";
+
+@import '@financial-times/o-header/main';
+@include oHeader(('top', 'sticky'));
+
 @mixin desktop($px) {
+	
 	@media (min-width: $px) {
 		// to allow the dropdown to line up with the myFT icon
 		.o-header__top-column--right {
 			position: relative;
 		}
 		
-		.header-top-link-myft-dropdown {
+		.header-top-link-myft-dropdown.__expanded {
 			height: 222px;
 			width: 164px;
 			left: unset;
@@ -13,61 +21,91 @@
 	}
 }
 
-.header-top-link-myft-dropdown {
-	position: absolute;
-	height: 212px;
-	left: calc(-50vw + 50%);
-	width: 100vw;
+.o-header__top-link--myft {
+	background-color: unset;
 
-	background: #FFFCFA;
-	box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
-	border-radius: 0px 0px 5px 5px;
+	&:hover {
+		text-decoration-color: none;
+	}
 
-	padding: 20px;
-	gap: 20px;
+	.o-icons-icon--arrow-down {
+		@include oIconsContent (
+			$icon-name: 'arrow-down',
+			$size: 20,
+		);
+		padding: inherit;
 
-	z-index: 2;
-	margin-top: 4px;
-	display: block;
-	right: 0;
-
-
-	.n-myft-dropdown-menu {
-		list-style-type:none;
-		padding-inline-start: unset;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: space-between;
-		height: 100%;
-		margin-block-start: unset;
-		margin-block-end: unset;
-
-		li {
-			text-align:left;
-			font-size: 16px;
-			line-height:20px;
-			top: 100px;
-			left: 20px;
-			right: 20px;
+		&.__rotated {
+			transform: rotate(180deg);
 		}
 	}
 
-	a {
-		text-decoration-line: unset;
-		font-family: 'MetricWeb';
-		font-style: normal;
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 20px;
-		color: #66605C;
-		flex: none;
-		order: 0;
-		flex-grow: 0;
+	&::after {
+		display: none;
 	}
 
-	a:hover {
-		text-decoration-line: underline;
-		text-decoration-color: rgb(51, 48, 46);
+}
+
+.header-top-link-myft-dropdown {
+	display: none;
+
+	&.__expanded {
+		position: absolute;
+		height: 212px;
+		left: calc(-50vw + 50%);
+		width: 100vw;
+	
+		background: #FFFCFA;
+		box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+		border-radius: 0px 0px 5px 5px;
+	
+		padding: 20px;
+		gap: 20px;
+	
+		z-index: 2;
+		margin-top: -6px;
+		display: block;
+		right: 0;
+		text-transform: none;
+	
+	
+		.n-myft-dropdown-menu {
+			list-style-type:none;
+			padding-inline-start: unset;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			height: 100%;
+			margin-block-start: unset;
+			margin-block-end: unset;
+	
+			li {
+				text-align:left;
+				font-size: 16px;
+				line-height:20px;
+				top: 100px;
+				left: 20px;
+				right: 20px;
+			}
+		}
+	
+		a {
+			text-decoration-line: unset;
+			font-family: 'MetricWeb';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 20px;
+			color: #66605C;
+			flex: none;
+			order: 0;
+			flex-grow: 0;
+		}
+	
+		a:hover {
+			text-decoration-line: underline;
+			text-decoration-color: rgb(51, 48, 46);
+		}
 	}
 }
