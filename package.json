@@ -53,5 +53,10 @@
   "peerDependencies": {
     "@financial-times/o-header": "^10.0.1",
     "@financial-times/o-icons": "^7.4.0"
+  },
+  "dependencies": {
+    "@financial-times/o-colors": "^6.4.2",
+    "@financial-times/o-typography": "^7.3.2",
+    "@financial-times/o-visual-effects": "^4.2.0"
   }
 }

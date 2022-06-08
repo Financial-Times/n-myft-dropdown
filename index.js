@@ -20,19 +20,14 @@ function attachDropdown() {
 	return button;
 }
 
-function setExpandedAttributes(expanded) {
-	const myFtIcons = document.getElementsByClassName(
-		'o-header__top-link o-header__top-link--myft'
-	);
-	Object.values(myFtIcons).forEach((icon) => {
-		icon.setAttribute('aria-expanded', expanded);
-		const arrow = icon.getElementsByClassName('o-icons-icon--arrow-down')[0];
-		if (expanded) {
-			arrow.classList.add('__rotated');
-		} else {
-			arrow.classList.remove('__rotated');
-		}
-	});
+function setExpandedAttributes(icon, expanded) {
+	icon.setAttribute('aria-expanded', expanded);
+	const arrow = icon.getElementsByClassName('o-icons-icon--arrow-down')[0];
+	if (expanded) {
+		arrow.classList.add('__rotated');
+	} else {
+		arrow.classList.remove('__rotated');
+	}
 }
 
 function toggleVisibility(element) {
@@ -51,7 +46,7 @@ function handleClickOutside(event) {
 		const inside = menu.contains(event.target);
 		if (!inside) {
 			menu.classList.remove('__expanded');
-			setExpandedAttributes(false);
+			setExpandedAttributes(menu.parentElement, false);
 			document.body.removeEventListener('click', handleClickOutside);
 		}
 	});
@@ -65,12 +60,15 @@ function addEventHandler() {
 		element.addEventListener('click', function (event) {
 			event.preventDefault();
 			const expanded = toggleVisibility(element);
+			const button = element.querySelector(
+				'.o-header__top-link.o-header__top-link--myft'
+			);
 			if (expanded) {
 				event.stopPropagation();
 				document.body.addEventListener('click', handleClickOutside);
-				setExpandedAttributes(true);
+				setExpandedAttributes(button, true);
 			} else {
-				setExpandedAttributes(false);
+				setExpandedAttributes(button, false);
 				document.body.removeEventListener('click', handleClickOutside);
 			}
 		});
@@ -84,6 +82,7 @@ function addMyFtDropDown() {
 	const myFtDropdown = attachDropdown();
 	Object.values(topColumnsRight).forEach((elem) => {
 		elem.appendChild(myFtDropdown.cloneNode(true));
+		elem.classList.add('o-header__top-column--right--myft-dropdown');
 	});
 }
 
