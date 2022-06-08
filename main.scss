@@ -5,9 +5,6 @@ $system-code: 'n-myft-dropdown';
 @import "@financial-times/o-colors/main";
 @include oColors();
 
-@import '@financial-times/o-header/main';
-@include oHeader(('top', 'sticky'));
-
 @import '@financial-times/o-typography/main';
 @include oTypography();
 
@@ -15,19 +12,18 @@ $system-code: 'n-myft-dropdown';
 @import '@financial-times/o-visual-effects/main';
 
 .o-header__top-column--right--myft-dropdown{
-	position: relative;
 
 	@include oGridRespondTo($from: M) {
-		position: static;
+		position: relative;
 	}
 
 	.o-header__top-link--myft {
-		margin-left: -40px;
-		margin-top: -10px;
-		margin-bottom: 10px;
+		margin: 8px 0;
 
 		@include oGridRespondTo($from: M) {
 			margin-left: -20px;
+			padding: 0%;
+			position: relative;
 		}
 
 		background-color: unset;
@@ -42,6 +38,7 @@ $system-code: 'n-myft-dropdown';
 				$size: 20,
 			);
 			padding: inherit;
+			margin: auto -5px 8px;
 
 			&.__rotated {
 				transform: rotate(180deg);
@@ -60,6 +57,11 @@ $system-code: 'n-myft-dropdown';
 	overflow: hidden;
 
 	&.__expanded {
+
+		@include oGridRespondTo($from: M) {
+			margin-top: 7px;
+		}
+
 		height: 212px;
 		width: 100vw;
 		box-sizing: border-box;
@@ -71,7 +73,7 @@ $system-code: 'n-myft-dropdown';
 		padding: 24px;
 	
 		z-index: 2;
-		margin-top: 4px;
+		margin-top: 6px;
 		display: block;
 		right: 0;
 		text-transform: none;
