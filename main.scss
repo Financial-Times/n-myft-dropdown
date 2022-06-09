@@ -11,13 +11,14 @@ $system-code: 'n-myft-dropdown';
 @import '@financial-times/o-grid/main';
 @import '@financial-times/o-visual-effects/main';
 
+
 .o-header__top-column--right--myft-dropdown{
 
 	@include oGridRespondTo($from: M) {
 		position: relative;
 	}
 
-	.o-header__top-link--myft {
+	button[class*="-link--myft"] {
 		margin: 8px 0;
 
 		@include oGridRespondTo($from: M) {
@@ -121,3 +122,35 @@ $system-code: 'n-myft-dropdown';
 		}
 	}
 }
+
+// extra styling needed for home-page
+.o-header--large-logo {
+
+	.o-header__top-column--right--myft-dropdown {	
+
+		.o-header__top-icon-link--myft {
+			@include oGridRespondTo($from: M) {
+				margin-left: 0;
+			}
+
+			.o-icons-icon--arrow-down {
+				margin-left: -14px;
+		
+				@include oGridRespondTo($from: M) {
+					margin-left: -5px;
+				}
+			}
+		
+			.header-top-link-myft-dropdown.__expanded {
+				margin-right: -20px;
+				width: calc(100vw + 20px);
+		
+				@include oGridRespondTo($from: M) {
+					margin-top: -5px;
+					margin-right: 0;
+					width: 164px;
+					}
+				}
+			}
+		}
+	}

@@ -1,6 +1,15 @@
+function detectLargeMenu() {
+	const largeLogo = document.querySelectorAll('.o-header--large-logo');
+	return largeLogo.length > 0;
+}
+
 function attachDropdown() {
 	const button = document.createElement('button');
-	button.classList.add('o-header__top-link', 'o-header__top-link--myft');
+	const largeMenu = detectLargeMenu();
+	button.classList.add(
+		`o-header__top${largeMenu ? '-icon' : ''}-link`,
+		`o-header__top${largeMenu ? '-icon' : ''}-link--myft`
+	);
 	const fallbackMarkup = `<span class="o-header__visually-hidden">myFT</span>
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
@@ -20,9 +29,9 @@ function attachDropdown() {
 	return button;
 }
 
-function setExpandedAttributes(icon, expanded) {
-	icon.setAttribute('aria-expanded', expanded);
-	const arrow = icon.getElementsByClassName('o-icons-icon--arrow-down')[0];
+function setExpandedAttributes(button, expanded) {
+	button.setAttribute('aria-expanded', expanded);
+	const arrow = button.getElementsByClassName('o-icons-icon--arrow-down')[0];
 	if (expanded) {
 		arrow.classList.add('__rotated');
 	} else {
@@ -30,8 +39,8 @@ function setExpandedAttributes(icon, expanded) {
 	}
 }
 
-function toggleVisibility(element) {
-	const dropdownElement = element.querySelector(
+function toggleVisibility(button) {
+	const dropdownElement = button.querySelector(
 		'.header-top-link-myft-dropdown'
 	);
 	const dropdownClasses = dropdownElement.classList;
@@ -53,16 +62,11 @@ function handleClickOutside(event) {
 }
 
 function addEventHandler() {
-	const topColumnsRight = document.getElementsByClassName(
-		'o-header__top-column o-header__top-column--right'
-	);
-	Object.values(topColumnsRight).forEach((element) => {
-		element.addEventListener('click', function (event) {
+	const buttons = document.querySelectorAll('button[class*="-link--myft"]');
+	Object.values(buttons).forEach((button) => {
+		button.addEventListener('click', function (event) {
 			event.preventDefault();
-			const expanded = toggleVisibility(element);
-			const button = element.querySelector(
-				'.o-header__top-link.o-header__top-link--myft'
-			);
+			const expanded = toggleVisibility(button);
 			if (expanded) {
 				event.stopPropagation();
 				document.body.addEventListener('click', handleClickOutside);
@@ -87,7 +91,7 @@ function addMyFtDropDown() {
 }
 
 function removeMyFtLink() {
-	const myFtLinks = document.querySelectorAll('a.o-header__top-link--myft');
+	const myFtLinks = document.querySelectorAll('a[class*="-link--myft"]');
 	Object.values(myFtLinks).forEach((link) => {
 		link.remove();
 	});

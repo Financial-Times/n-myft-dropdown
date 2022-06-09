@@ -26,7 +26,6 @@ flags.get('myFTDropdownTest' === 'variant) {
 Import the styles into main.scss, as set the min width for desktop styling (to match the rest of the app):
 ```
 @import 'n-myft-dropdown/main';
-@include desktop(980px);
 ```
 
 ## Developing
@@ -40,5 +39,3 @@ npm link
 ```
 
 If you would like to see your changes in a local app, run `npm link n-myft-dropdown` in the consuming app, and ensure that the code described in "How to use in a consuming app" is present.
-
-
