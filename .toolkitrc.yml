@@ -1,11 +1,12 @@
 plugins:
-  - '@dotcom-tool-kit/eslint'
-  - '@dotcom-tool-kit/npm'
   - '@dotcom-tool-kit/circleci-npm'
   - '@dotcom-tool-kit/circleci'
+  - '@dotcom-tool-kit/eslint'
   - '@dotcom-tool-kit/lint-staged-npm'
+  - '@dotcom-tool-kit/npm'
   - '@dotcom-tool-kit/prettier'
   - '@dotcom-tool-kit/secret-squirrel'
+  - '@dotcom-tool-kit/webpack'
 
 hooks:
   'test:local':
@@ -15,5 +16,12 @@ hooks:
   git:precommit:
     - SecretSquirrel
     - LintStaged
+  'build:local':
+    - WebpackDevelopment
 
-options: {}
+options:
+  '@dotcom-tool-kit/webpack':
+    configPath: demos/webpack.config.js
+  '@dotcom-tool-kit/prettier':
+    files: ['{,!(node_modules|demos/public)/**/}*.js']
+
