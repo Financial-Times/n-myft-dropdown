@@ -44,14 +44,16 @@ function closeDropdown(menu) {
 	menu.classList.remove('__expanded');
 	setExpandedAttributes(menu.parentElement, false);
 	document.body.removeEventListener('click', handleClickOutside);
-	menu.parentElement.removeEventListener('mouseleave', handleMouseOut);
+	menu.parentElement.removeEventListener('mouseleave', handleMoveOut);
+	menu.parentElement.removeEventListener('touchend', handleMoveOut);
 }
 
 function openDropdown(menu) {
 	menu.classList.add('__expanded');
 	setExpandedAttributes(menu.parentElement, true);
 	document.body.addEventListener('click', handleClickOutside);
-	menu.parentElement.addEventListener('mouseleave', handleMouseOut);
+	menu.parentElement.addEventListener('mouseleave', handleMoveOut);
+	menu.parentElement.addEventListener('touchend', handleMoveOut);
 }
 
 function handleClickOutside(event) {
@@ -66,7 +68,7 @@ function handleClickOutside(event) {
 	});
 }
 
-function handleMouseOut() {
+function handleMoveOut() {
 	const myFtDropdownMenus = document.querySelectorAll(
 		'.header-top-link-myft-dropdown.__expanded'
 	);
