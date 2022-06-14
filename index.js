@@ -14,7 +14,7 @@ function attachDropdown() {
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
 	const dropdownMarkup = `
-		<ul class="n-myft-dropdown-menu" onclick="event.stopPropagation()">
+		<ul class="n-myft-dropdown-menu" onclick="event.stopPropagation() role="menu">
 			<li class="n-myft-dropdown-list"><a href="/myft/following">Topic Feed</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/saved-articles">Saved Articles</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/explore">Explore Feed</a></li>
@@ -23,6 +23,7 @@ function attachDropdown() {
 		</ul>`;
 	const dropdown = document.createElement('span');
 	dropdown.classList.add('header-top-link-myft-dropdown');
+	button.ariaHasPopup = true;
 	dropdown.innerHTML = dropdownMarkup.trim();
 	button.appendChild(dropdown);
 
