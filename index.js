@@ -39,12 +39,18 @@ function setExpandedAttributes(button, expanded) {
 	}
 }
 
-function toggleVisibility(button) {
-	const dropdownElement = button.querySelector(
-		'.header-top-link-myft-dropdown'
-	);
-	const dropdownClasses = dropdownElement.classList;
-	return dropdownClasses.toggle('__expanded');
+function closeDropdown(menu) {
+	menu.classList.remove('__expanded');
+	setExpandedAttributes(menu.parentElement, false);
+	document.body.removeEventListener('click', handleClickOutside);
+	menu.parentElement.removeEventListener('mouseleave', handleMouseOut);
+}
+
+function openDropdown(menu) {
+	menu.classList.add('__expanded');
+	setExpandedAttributes(menu.parentElement, true);
+	document.body.addEventListener('click', handleClickOutside);
+	menu.parentElement.addEventListener('mouseleave', handleMouseOut);
 }
 
 function handleClickOutside(event) {
@@ -54,10 +60,17 @@ function handleClickOutside(event) {
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		const inside = menu.contains(event.target);
 		if (!inside) {
-			menu.classList.remove('__expanded');
-			setExpandedAttributes(menu.parentElement, false);
-			document.body.removeEventListener('click', handleClickOutside);
+			closeDropdown(menu);
 		}
+	});
+}
+
+function handleMouseOut() {
+	const myFtDropdownMenus = document.querySelectorAll(
+		'.header-top-link-myft-dropdown.__expanded'
+	);
+	Object.values(myFtDropdownMenus).forEach((menu) => {
+		setTimeout(() => closeDropdown(menu), 3000);
 	});
 }
 
@@ -66,14 +79,12 @@ function addEventHandler() {
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
-			const expanded = toggleVisibility(button);
-			if (expanded) {
+			const expanded = button.getElementsByClassName('__expanded');
+			if (expanded.length === 0) {
 				event.stopPropagation();
-				document.body.addEventListener('click', handleClickOutside);
-				setExpandedAttributes(button, true);
+				openDropdown(button.lastChild);
 			} else {
-				setExpandedAttributes(button, false);
-				document.body.removeEventListener('click', handleClickOutside);
+				closeDropdown(button.lastChild);
 			}
 		});
 	});
