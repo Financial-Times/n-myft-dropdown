@@ -39,3 +39,10 @@ npm link
 ```
 
 If you would like to see your changes in a local app, run `npm link n-myft-dropdown` in the consuming app, and ensure that the code described in "How to use in a consuming app" is present.
+
+To run the demo page:
+```
+npm run demo
+```
+
+When you run this command, it starts two processes: one with Node running an express server to serve the demo page on `http://localhost:3000`, and the other one with the `WebpackWatch` task to watch for changes on the `css`, `js` files.

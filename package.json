@@ -9,7 +9,7 @@
     "build": "dotcom-tool-kit build:local",
     "format": "dotcom-tool-kit format:local",
     "start": "dotcom-tool-kit run:local",
-    "demo": "nodemon demos/start.js"
+    "demo": "concurrently -n webpack,node \"npm run start\" \"node demos/start.js\""
   },
   "repository": {
     "type": "git",
@@ -37,11 +37,11 @@
     "@financial-times/eslint-config-next": "^4.0.0",
     "@financial-times/secret-squirrel": "^2.19.0",
     "check-engines": "^1.5.0",
+    "concurrently": "^7.2.2",
     "cookie-parser": "^1.4.6",
     "dotcom-tool-kit": "^2.2.1",
     "eslint-config-prettier": "^8.5.0",
     "express": "^4.18.1",
-    "nodemon": "^2.0.16",
     "sucrase": "^3.21.0"
   },
   "engines": {
@@ -64,7 +64,7 @@
     "@financial-times/o-colors": "^6.4.2",
     "@financial-times/o-header": "^10.0.1",
     "@financial-times/o-icons": "^7.4.0",
-		"@financial-times/o-tracking": "^4.3.2",
+    "@financial-times/o-tracking": "^4.3.2",
     "@financial-times/o-typography": "^7.3.2",
     "@financial-times/o-visual-effects": "^4.2.0",
     "@financial-times/o-utils": "^2.1.1"

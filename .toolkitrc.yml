@@ -24,4 +24,6 @@ options:
     configPath: demos/webpack.config.js
   '@dotcom-tool-kit/prettier':
     files: ['{,!(node_modules|demos/public)/**/}*.js']
+  '@dotcom-tool-kit/eslint':
+    files: '{,!(demos/public)/**/}*.js'
 
