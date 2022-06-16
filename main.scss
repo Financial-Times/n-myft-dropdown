@@ -44,12 +44,11 @@ $system-code: 'n-myft-dropdown';
 			);
 			padding: inherit;
 			margin: auto -5px 8px;
-
-			&.__rotated {
-				transform: rotate(180deg);
-			}
 		}
 
+		.o-icons-icon--arrow-down--rotated {
+			transform: rotate(180deg);
+		}
 		&::after {
 			display: none;
 		}
@@ -60,72 +59,73 @@ $system-code: 'n-myft-dropdown';
 	position: absolute;
 	height: 0;
 	overflow: hidden;
+}
 
-	&.__expanded {
+.header-top-link-myft-dropdown--expanded {
 
-		@include oGridRespondTo($from: M) {
-			margin-top: -4px;
-		}
+	@include oGridRespondTo($from: M) {
+		margin-top: -4px;
+	}
 
-		height: 222px;
-		width: 100vw;
-		box-sizing: border-box;
-	
-		background: oColorsByName('white-80');
-		box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
-		border-radius: 0px 0px 5px 5px;
-	
+	height: 222px;
+	width: 100vw;
+	box-sizing: border-box;
+
+	background: oColorsByName('white-80');
+	box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+	border-radius: 0px 0px 5px 5px;
+
+	padding: 20px;
+
+	z-index: 2;
+	margin-top: -2px;
+	display: block;
+	right: 0;
+	text-transform: none;
+
+	transition: height 0.2s $o-visual-effects-timing-slide;
+
+	@include oGridRespondTo($from: M) {
+		width: 164px;
 		padding: 20px;
-	
-		z-index: 2;
-		margin-top: -2px;
-		display: block;
-		right: 0;
-		text-transform: none;
-	
-		transition: height 0.2s $o-visual-effects-timing-slide;
-	
-		@include oGridRespondTo($from: M) {
-			width: 164px;
-			padding: 20px;
-			left: unset;
-			transition: none;
-		}
+		left: unset;
+		transition: none;
+	}
 
-		.n-myft-dropdown-menu {
-			list-style-type:none;
-			padding-inline-start: unset;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			justify-content: space-between;
-			height: 182px;
-			margin: 0;
-	
-			li {
-				text-align:left;
+	.n-myft-dropdown-menu {
+		list-style-type:none;
+		padding-inline-start: unset;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		height: 182px;
+		margin: 0;
 
-				top: 100px;
-				left: 20px;
-				right: 20px;
+		li {
+			text-align:left;
 
-				a {
-					text-decoration-line: unset;
-					font-family: 'MetricWeb';
-					@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
-					color: oColorsByName('black-60');
-					flex: none;
-					order: 0;
-					flex-grow: 0;
-				}
+			top: 100px;
+			left: 20px;
+			right: 20px;
 
-				a:hover {
-					border-bottom: 2px solid oColorsByName('black-80');;
-				}
+			a {
+				text-decoration-line: unset;
+				font-family: 'MetricWeb';
+				@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
+				color: oColorsByName('black-60');
+				flex: none;
+				order: 0;
+				flex-grow: 0;
+			}
+
+			a:hover {
+				border-bottom: 2px solid oColorsByName('black-80');;
 			}
 		}
 	}
 }
+
 
 // extra styling needed for home-page
 .o-header--large-logo {
@@ -146,7 +146,7 @@ $system-code: 'n-myft-dropdown';
 				}
 			}
 		
-			.header-top-link-myft-dropdown.__expanded {
+			.header-top-link-myft-dropdown--expanded {
 				margin-right: -20px;
 				width: calc(100vw + 20px);
 		

@@ -34,14 +34,14 @@ function setExpandedAttributes(button, expanded) {
 	button.setAttribute('aria-expanded', expanded);
 	const arrow = button.querySelector('.o-icons-icon--arrow-down');
 	if (expanded) {
-		arrow.classList.add('__rotated');
+		arrow.classList.add('o-icons-icon--arrow-down--rotated');
 	} else {
-		arrow.classList.remove('__rotated');
+		arrow.classList.remove('o-icons-icon--arrow-down--rotated');
 	}
 }
 
 function closeDropdown(menu) {
-	menu.classList.remove('__expanded');
+	menu.classList.remove('header-top-link-myft-dropdown--expanded');
 	setExpandedAttributes(menu.parentElement, false);
 	document.body.removeEventListener('click', handleClickOutside);
 	menu.parentElement.removeEventListener('mouseleave', handleMoveOut);
@@ -49,7 +49,7 @@ function closeDropdown(menu) {
 }
 
 function openDropdown(menu) {
-	menu.classList.add('__expanded');
+	menu.classList.add('header-top-link-myft-dropdown--expanded');
 	setExpandedAttributes(menu.parentElement, true);
 	document.body.addEventListener('click', handleClickOutside);
 	menu.parentElement.addEventListener('mouseleave', handleMoveOut);
@@ -58,7 +58,7 @@ function openDropdown(menu) {
 
 function handleClickOutside(event) {
 	const myFtDropdownMenus = document.querySelectorAll(
-		'.header-top-link-myft-dropdown.__expanded'
+		'.header-top-link-myft-dropdown--expanded'
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		const inside = menu.contains(event.target);
@@ -70,19 +70,21 @@ function handleClickOutside(event) {
 
 function handleMoveOut() {
 	const myFtDropdownMenus = document.querySelectorAll(
-		'.header-top-link-myft-dropdown.__expanded'
+		'.header-top-link-myft-dropdown--expanded'
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		setTimeout(() => closeDropdown(menu), 3000);
 	});
 }
 
-function addEventHandler() {
+function addToggleEventHandler() {
 	const buttons = document.querySelectorAll('button[class*="-link--myft"]');
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
-			const expanded = button.querySelector('.__expanded');
+			const expanded = button.querySelector(
+				'.header-top-link-myft-dropdown--expanded'
+			);
 			if (!expanded) {
 				event.stopPropagation();
 				openDropdown(button.lastChild);
@@ -114,5 +116,5 @@ function removeMyFtLink() {
 export function init() {
 	removeMyFtLink();
 	addMyFtDropDown();
-	addEventHandler();
+	addToggleEventHandler();
 }
