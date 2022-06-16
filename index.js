@@ -14,7 +14,7 @@ function attachDropdown() {
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
 	const dropdownMarkup = `
-		<ul class="n-myft-dropdown-menu" onclick="event.stopPropagation() role="menu">
+		<ul class="n-myft-dropdown-menu" role="menu">
 			<li class="n-myft-dropdown-list"><a href="/myft/following">Topic Feed</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/saved-articles">Saved Articles</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/explore">Explore Feed</a></li>
