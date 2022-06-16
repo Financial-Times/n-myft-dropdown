@@ -32,7 +32,7 @@ function attachDropdown() {
 
 function setExpandedAttributes(button, expanded) {
 	button.setAttribute('aria-expanded', expanded);
-	const arrow = button.getElementsByClassName('o-icons-icon--arrow-down')[0];
+	const arrow = button.querySelector('.o-icons-icon--arrow-down');
 	if (expanded) {
 		arrow.classList.add('__rotated');
 	} else {
@@ -82,8 +82,8 @@ function addEventHandler() {
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
-			const expanded = button.getElementsByClassName('__expanded');
-			if (expanded.length === 0) {
+			const expanded = button.querySelector('.__expanded');
+			if (!expanded) {
 				event.stopPropagation();
 				openDropdown(button.lastChild);
 			} else {
