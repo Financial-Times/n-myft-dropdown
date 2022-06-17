@@ -107,7 +107,9 @@ function addMyFtDropDown() {
 }
 
 function removeMyFtLink() {
-	const myFtLinks = document.querySelectorAll('a[class*="-link--myft"]');
+	const myFtLinks = document.querySelectorAll(
+		'[class="o-header__top-column--right--myft-dropdown"], a[class*="-link--myft"]'
+	);
 	Object.values(myFtLinks).forEach((link) => {
 		link.remove();
 	});
