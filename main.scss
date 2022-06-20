@@ -37,105 +37,9 @@ $system-code: 'n-myft-dropdown';
 			text-decoration-color: none;
 		}
 
-		.o-icons-icon--arrow-down {
-			@include oIconsContent (
-				$icon-name: 'arrow-down',
-				$size: 20,
-			);
-			padding: inherit;
-			margin: auto -5px 8px;
-		}
-
-		.o-icons-icon--arrow-down--rotated {
-			transform: rotate(180deg);
-		}
-		&::after {
-			display: none;
-		}
-	}
-}
-
-.header-top-link-myft-dropdown {
-	position: absolute;
-	height: 0;
-	overflow: hidden;
-}
-
-.header-top-link-myft-dropdown--expanded {
-
-	@include oGridRespondTo($from: M) {
-		margin-top: -4px;
-	}
-
-	height: 222px;
-	width: 100vw;
-	box-sizing: border-box;
-
-	background: oColorsByName('white-80');
-	box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
-	border-radius: 0px 0px 5px 5px;
-
-	padding: 20px;
-
-	z-index: 2;
-	margin-top: -2px;
-	display: block;
-	right: 0;
-	text-transform: none;
-
-	transition: height 0.2s $o-visual-effects-timing-slide;
-
-	@include oGridRespondTo($from: M) {
-		width: 164px;
-		padding: 20px;
-		left: unset;
-		transition: none;
-	}
-
-	.n-myft-dropdown-menu {
-		list-style-type:none;
-		padding-inline-start: unset;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: space-between;
-		height: 182px;
-		margin: 0;
-
-		li {
-			text-align:left;
-
-			top: 100px;
-			left: 20px;
-			right: 20px;
-
-			a {
-				text-decoration-line: unset;
-				font-family: 'MetricWeb';
-				@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
-				color: oColorsByName('black-60');
-				flex: none;
-				order: 0;
-				flex-grow: 0;
-			}
-
-			a:hover {
-				border-bottom: 2px solid oColorsByName('black-80');;
-			}
-		}
-	}
-}
-
-
-// extra styling needed for home-page
-.o-header--large-logo {
-
-	.o-header__top-column--right--myft-dropdown {	
-
-		.o-header__top-icon-link--myft {
+		&.o-header__top-icon-link--myft-large-header {
 			@include oGridRespondTo($from: M) {
 				margin-left: 0;
-				margin-top: 8px;
 			}
 
 			.o-icons-icon--arrow-down {
@@ -157,5 +61,93 @@ $system-code: 'n-myft-dropdown';
 					}
 				}
 			}
+
+		.o-icons-icon--arrow-down {
+			@include oIconsContent (
+				$icon-name: 'arrow-down',
+				$size: 20,
+			);
+			padding: inherit;
+			margin: auto -5px 8px;
+		}
+
+		.o-icons-icon--arrow-down--rotated {
+			transform: rotate(180deg);
+		}
+
+		.header-top-link-myft-dropdown {
+			position: absolute;
+			height: 0;
+			overflow: hidden;
+		}
+		
+		.header-top-link-myft-dropdown--expanded {
+		
+			@include oGridRespondTo($from: M) {
+				margin-top: -4px;
+			}
+		
+			height: 222px;
+			width: 100vw;
+			box-sizing: border-box;
+		
+			background: oColorsByName('white-80');
+			box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+			border-radius: 0px 0px 5px 5px;
+		
+			padding: 20px;
+		
+			z-index: 2;
+			margin-top: -2px;
+			display: block;
+			right: 0;
+			text-transform: none;
+		
+			transition: height 0.2s $o-visual-effects-timing-slide;
+		
+			@include oGridRespondTo($from: M) {
+				width: 164px;
+				padding: 20px;
+				left: unset;
+				transition: none;
+			}
+		
+			.n-myft-dropdown-menu {
+				list-style-type:none;
+				padding-inline-start: unset;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				justify-content: space-between;
+				height: 182px;
+				margin: 0;
+		
+				li {
+					text-align:left;
+		
+					top: 100px;
+					left: 20px;
+					right: 20px;
+		
+					a {
+						text-decoration-line: unset;
+						font-family: 'MetricWeb';
+						@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
+						color: oColorsByName('black-60');
+						flex: none;
+						order: 0;
+						flex-grow: 0;
+					}
+		
+					a:hover {
+						border-bottom: 2px solid oColorsByName('black-80');;
+					}
+				}
+			}
+		}
+
+		&::after {
+			display: none;
 		}
 	}
+}

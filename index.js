@@ -1,15 +1,18 @@
-function detectLargeMenu() {
+function detectlargeHeader() {
 	const largeLogo = document.querySelectorAll('.o-header--large-logo');
 	return largeLogo.length > 0;
 }
 
 function attachDropdown() {
 	const button = document.createElement('button');
-	const largeMenu = detectLargeMenu();
+	const largeHeader = detectlargeHeader();
 	button.classList.add(
-		`o-header__top${largeMenu ? '-icon' : ''}-link`,
-		`o-header__top${largeMenu ? '-icon' : ''}-link--myft`
+		`o-header__top${largeHeader ? '-icon' : ''}-link`,
+		`o-header__top${largeHeader ? '-icon' : ''}-link--myft`
 	);
+	if (largeHeader) {
+		button.classList.add(`o-header__top-icon-link--myft-large-header`);
+	}
 	const fallbackMarkup = `<span class="o-header__visually-hidden">myFT</span>
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
