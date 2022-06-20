@@ -1,3 +1,5 @@
+const timeoutIds = {};
+
 function detectlargeHeader() {
 	const largeLogo = document.querySelectorAll('.o-header--large-logo');
 	return largeLogo.length > 0;
@@ -17,7 +19,7 @@ function attachDropdown() {
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
 	const dropdownMarkup = `
-		<ul class="n-myft-dropdown-menu" role="menu">
+		<ul class="n-myft-dropdown-menu" onclick=event.stopPropagation() role="menu">
 			<li class="n-myft-dropdown-list"><a href="/myft/following">Topic Feed</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/saved-articles">Saved Articles</a></li>
 			<li class="n-myft-dropdown-list"><a href="/myft/explore">Explore Feed</a></li>
@@ -43,7 +45,12 @@ function setExpandedAttributes(button, expanded) {
 	}
 }
 
+function handleMoveIn(event) {
+	clearTimeout(timeoutIds[event.target.id]);
+}
+
 function closeDropdown(menu) {
+	clearTimeout(menu.parentElement.id);
 	menu.classList.remove('header-top-link-myft-dropdown--expanded');
 	setExpandedAttributes(menu.parentElement, false);
 	document.body.removeEventListener('click', handleClickOutside);
@@ -56,7 +63,11 @@ function openDropdown(menu) {
 	setExpandedAttributes(menu.parentElement, true);
 	document.body.addEventListener('click', handleClickOutside);
 	menu.parentElement.addEventListener('mouseleave', handleMoveOut);
+	menu.parentElement.addEventListener('mouseenter', handleMoveIn);
 	menu.parentElement.addEventListener('touchend', handleMoveOut);
+	menu.parentElement.addEventListener('touchstart', handleMoveIn, {
+		passive: true,
+	});
 }
 
 function handleClickOutside(event) {
@@ -76,7 +87,8 @@ function handleMoveOut() {
 		'.header-top-link-myft-dropdown--expanded'
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
-		setTimeout(() => closeDropdown(menu), 3000);
+		const buttonId = menu.parentElement.id;
+		timeoutIds[buttonId] = setTimeout(() => closeDropdown(menu), 3000);
 	});
 }
 
@@ -85,14 +97,15 @@ function addToggleEventHandler() {
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
+			button.id = Math.floor(Math.random() * 10);
 			const expanded = button.querySelector(
 				'.header-top-link-myft-dropdown--expanded'
 			);
 			if (!expanded) {
 				event.stopPropagation();
-				openDropdown(button.lastChild);
+				openDropdown(button.lastChild, button.id);
 			} else {
-				closeDropdown(button.lastChild);
+				closeDropdown(button.lastChild, button.id);
 			}
 		});
 	});
