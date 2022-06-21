@@ -21,11 +21,11 @@ function attachDropdown() {
 	button.innerHTML = fallbackMarkup.trim();
 	const dropdownMarkup = `
 		<ul class="n-myft-dropdown-menu" onclick=event.stopPropagation() role="menu">
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following">Topic Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/saved-articles">Saved Articles</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/explore">Explore Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/newsletters">Newsletters</a></li> 
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts">Contact Preferences</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following" tabindex="-1">Topic Feed</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/saved-articles" tabindex="-1">Saved Articles</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/explore" tabindex="-1">Explore Feed</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/newsletters" tabindex="-1">Newsletters</a></li> 
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts" tabindex="-1">Contact Preferences</a></li>
 		</ul>`;
 	const dropdown = document.createElement('span');
 	dropdown.classList.add('header-top-link-myft-dropdown');
@@ -44,6 +44,11 @@ function setExpandedAttributes(button, expanded) {
 	} else {
 		arrow.classList.remove('o-icons-icon--arrow-down--rotated');
 	}
+	const linkItems = button.querySelectorAll('a');
+	const tabValue = expanded ? 0 : -1;
+	linkItems.forEach((item) => {
+		item.setAttribute('tabindex', tabValue);
+	});
 }
 
 function handleMoveIn(event) {
