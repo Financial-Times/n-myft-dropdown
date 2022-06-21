@@ -1,7 +1,7 @@
 {
-  "name": "n-myft-dropdown",
+  "name": "@financial-times/n-myft-dropdown",
   "version": "0.0.1",
-  "description": "coming soon...",
+  "description": "A front-end component for to replace the header's myFT link with a dropdown",
   "main": "index.js",
   "private": true,
   "scripts": {
