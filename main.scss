@@ -17,12 +17,11 @@ $system-code: 'n-myft-dropdown';
 	@include oGridRespondTo($from: M) {
 		position: relative;
 	}
-
-	button[class*="-link--myft"] {
+	// this class needs to be *= as there can be a trailing space in the name
+	button[class*="o-header__top-icon-link o-header__top-icon-link--myft"] {
 		margin: 8px 0;
 
 		@include oGridRespondTo($from: M) {
-			margin-left: -20px;
 			padding: 0%;
 			position: relative;
 
@@ -38,9 +37,6 @@ $system-code: 'n-myft-dropdown';
 		}
 
 		&.o-header__top-icon-link--myft-large-header {
-			@include oGridRespondTo($from: M) {
-				margin-left: 0;
-			}
 
 			.o-icons-icon--arrow-down {
 				margin-left: -14px;

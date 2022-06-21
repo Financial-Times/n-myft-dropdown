@@ -7,11 +7,12 @@ function detectlargeHeader() {
 
 function attachDropdown() {
 	const button = document.createElement('button');
-	const largeHeader = detectlargeHeader();
+
 	button.classList.add(
-		`o-header__top${largeHeader ? '-icon' : ''}-link`,
-		`o-header__top${largeHeader ? '-icon' : ''}-link--myft`
+		`o-header__top-icon-link`,
+		`o-header__top-icon-link--myft`
 	);
+	const largeHeader = detectlargeHeader();
 	if (largeHeader) {
 		button.classList.add(`o-header__top-icon-link--myft-large-header`);
 	}
@@ -93,7 +94,10 @@ function handleMoveOut() {
 }
 
 function addToggleEventHandler() {
-	const buttons = document.querySelectorAll('button[class*="-link--myft"]');
+	// this class needs to be *= as there can be a trailing space in the name
+	const buttons = document.querySelectorAll(
+		'button[class*="o-header__top-icon-link--myft"]'
+	);
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
@@ -124,7 +128,7 @@ function addMyFtDropDown() {
 
 function removeMyFtLink() {
 	const myFtLinks = document.querySelectorAll(
-		'[class="o-header__top-column--right--myft-dropdown"], a[class*="-link--myft"]'
+		'[class="o-header__top-column--right--myft-dropdown"], a[class*="o-header__top-icon-link--myft"]'
 	);
 	Object.values(myFtLinks).forEach((link) => {
 		link.remove();
