@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "A front-end component for to replace the header's myFT link with a dropdown",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine",
     "test": "dotcom-tool-kit test:local",
