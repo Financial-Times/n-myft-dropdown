@@ -62,7 +62,7 @@ function handleMoveIn(event) {
 }
 
 function closeDropdown(menu) {
-	clearTimeout(menu.parentElement.id);
+	clearTimeout(timeoutIds[menu.parentElement.id]);
 	menu.classList.remove('header-top-link-myft-dropdown--expanded');
 	setExpandedAttributes(menu.parentElement, false);
 	document.body.removeEventListener('click', handleClickOutside);
