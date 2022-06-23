@@ -16,7 +16,7 @@ It's anticipated that this will be present on 2 apps:
 In client/main.js, import the component, check for whether the `myFTDropdownTest` flag is set to variant, and initialise the component if so:
 
 ```
-import * as myFtDropdown from 'n-myft-dropdown';
+import * as myFtDropdown from '@financial-times/n-myft-dropdown';
 
 flags.get('myFTDropdownTest' === 'variant) {
 	myFtDropdown.init();
@@ -25,7 +25,7 @@ flags.get('myFTDropdownTest' === 'variant) {
 
 Import the styles into main.scss, as set the min width for desktop styling (to match the rest of the app):
 ```
-@import 'n-myft-dropdown/main';
+@import '@financial-times/n-myft-dropdown/main';
 ```
 
 ## Developing
@@ -38,7 +38,7 @@ npm install
 npm link
 ```
 
-If you would like to see your changes in a local app, run `npm link n-myft-dropdown` in the consuming app, and ensure that the code described in "How to use in a consuming app" is present.
+If you would like to see your changes in a local app, run `npm link @financial-times/n-myft-dropdown` in the consuming app, and ensure that the code described in "How to use in a consuming app" is present.
 
 To run the demo page:
 ```
