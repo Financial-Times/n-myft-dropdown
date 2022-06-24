@@ -19,13 +19,15 @@ function attachDropdown() {
 	const fallbackMarkup = `<span class="o-header__visually-hidden">myFT</span>
 							<span class="o-icons-icon o-icons-icon--arrow-down"></span>`;
 	button.innerHTML = fallbackMarkup.trim();
+	button.setAttribute('data-trackable', 'myft-dropdown-open');
+	button.setAttribute('data-trackable-context-text', 'myFT');
 	const dropdownMarkup = `
 		<ul class="n-myft-dropdown-menu" onclick=event.stopPropagation() role="menu">
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following" tabindex="-1">Topic Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/saved-articles" tabindex="-1">Saved Articles</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/explore" tabindex="-1">Explore Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/newsletters" tabindex="-1">Newsletters</a></li> 
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts" tabindex="-1">Contact Preferences</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following" tabindex="-1" data-trackable="myft-dropdown-topic-feed">Topic Feed</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/saved-articles" tabindex="-1" data-trackable="myft-dropdown-saved-articles">Saved Articles</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/explore" tabindex="-1" data-trackable="myft-dropdown-explore-feed">Explore Feed</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/newsletters" tabindex="-1" data-trackable="myft-dropdown-newsletters">Newsletters</a></li>
+			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts" tabindex="-1" data-trackable="myft-dropdown-contact-preferences">Contact Preferences</a></li>
 		</ul>`;
 	const dropdown = document.createElement('span');
 	dropdown.classList.add('header-top-link-myft-dropdown');
@@ -38,6 +40,10 @@ function attachDropdown() {
 
 function setExpandedAttributes(button, expanded) {
 	button.setAttribute('aria-expanded', expanded);
+	button.setAttribute(
+		'data-trackable',
+		`'myft-dropdown-${expanded ? 'close' : 'open'}'`
+	);
 	const arrow = button.querySelector('.o-icons-icon--arrow-down');
 	if (expanded) {
 		arrow.classList.add('o-icons-icon--arrow-down--rotated');
@@ -56,7 +62,7 @@ function handleMoveIn(event) {
 }
 
 function closeDropdown(menu) {
-	clearTimeout(menu.parentElement.id);
+	clearTimeout(timeoutIds[menu.parentElement.id]);
 	menu.classList.remove('header-top-link-myft-dropdown--expanded');
 	setExpandedAttributes(menu.parentElement, false);
 	document.body.removeEventListener('click', handleClickOutside);
@@ -83,6 +89,7 @@ function handleClickOutside(event) {
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		const inside = menu.contains(event.target);
 		if (!inside) {
+			dispatchTrackingEvent({ action: 'clickOutside' });
 			closeDropdown(menu);
 		}
 	});
@@ -94,7 +101,11 @@ function handleMoveOut() {
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
 		const buttonId = menu.parentElement.id;
-		timeoutIds[buttonId] = setTimeout(() => closeDropdown(menu), 3000);
+		function onMoveOut() {
+			dispatchTrackingEvent({ action: 'moveOut' });
+			closeDropdown(menu);
+		}
+		timeoutIds[buttonId] = setTimeout(onMoveOut, 3000);
 	});
 }
 
@@ -110,6 +121,7 @@ function addToggleEventHandler() {
 			const expanded = button.querySelector(
 				'.header-top-link-myft-dropdown--expanded'
 			);
+			dispatchTrackingEvent({ action: expanded ? 'close' : 'open' });
 			if (!expanded) {
 				event.stopPropagation();
 				openDropdown(button.lastChild, button.id);
@@ -140,8 +152,35 @@ function removeMyFtLink() {
 	});
 }
 
+function addTrackingEventHandlers() {
+	const myFtDropdownLinks = document.querySelectorAll(
+		'.n-myft-dropdown-list > a'
+	);
+	Object.values(myFtDropdownLinks).forEach((link) => {
+		link.addEventListener('click', function () {
+			dispatchTrackingEvent({ action: 'click', text: link.text });
+		});
+	});
+}
+
+function dispatchTrackingEvent({ action, text }) {
+	document.body.dispatchEvent(
+		new CustomEvent('oTracking.event', {
+			detail: {
+				category: 'myFTDropdown',
+				teamName: 'customer-products-us-growth',
+				amplitudeExploratory: true,
+				action,
+				...(text && { text }),
+			},
+			bubbles: true,
+		})
+	);
+}
+
 export function init() {
 	removeMyFtLink();
 	addMyFtDropDown();
 	addToggleEventHandler();
+	addTrackingEventHandlers();
 }

@@ -1,0 +1,10 @@
+$system-code: 'n-myft-dropdown';
+
+@import '@financial-times/o-header/main';
+@include oHeader();
+
+@import '../../main';
+
+html {
+	background-color: oColorsByName('paper');
+}

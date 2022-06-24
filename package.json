@@ -7,8 +7,9 @@
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine",
     "test": "dotcom-tool-kit test:local",
     "build": "dotcom-tool-kit build:local",
+    "format": "dotcom-tool-kit format:local",
     "start": "dotcom-tool-kit run:local",
-    "format": "dotcom-tool-kit format:local"
+    "demo": "concurrently -n webpack,node \"npm run start\" \"node demos/start.js\""
   },
   "repository": {
     "type": "git",
@@ -21,17 +22,27 @@
   },
   "homepage": "https://github.com/Financial-Times/n-myft-dropdown#readme",
   "devDependencies": {
-    "@dotcom-tool-kit/circleci": "^2.0.1",
-    "@dotcom-tool-kit/circleci-npm": "^2.0.1",
-    "@dotcom-tool-kit/eslint": "^2.0.1",
-    "@dotcom-tool-kit/lint-staged-npm": "^2.0.2",
-    "@dotcom-tool-kit/prettier": "^2.0.2",
-    "@dotcom-tool-kit/secret-squirrel": "^1.0.0",
+    "@dotcom-tool-kit/circleci": "^2.1.0",
+    "@dotcom-tool-kit/circleci-npm": "^2.0.3",
+    "@dotcom-tool-kit/eslint": "^2.1.1",
+    "@dotcom-tool-kit/lint-staged-npm": "^2.0.3",
+    "@dotcom-tool-kit/nodemon": "^2.0.2",
+    "@dotcom-tool-kit/npm": "^2.0.3",
+    "@dotcom-tool-kit/prettier": "^2.0.3",
+    "@dotcom-tool-kit/secret-squirrel": "^1.0.1",
+    "@dotcom-tool-kit/webpack": "^2.1.1",
+    "@financial-times/dotcom-build-base": "^7.1.0",
+    "@financial-times/dotcom-build-sass": "^7.1.0",
+    "@financial-times/dotcom-server-handlebars": "^7.1.0",
     "@financial-times/eslint-config-next": "^4.0.0",
     "@financial-times/secret-squirrel": "^2.19.0",
     "check-engines": "^1.5.0",
-    "dotcom-tool-kit": "^2.1.1",
-    "eslint-config-prettier": "^8.5.0"
+    "concurrently": "^7.2.2",
+    "cookie-parser": "^1.4.6",
+    "dotcom-tool-kit": "^2.2.1",
+    "eslint-config-prettier": "^8.5.0",
+    "express": "^4.18.1",
+    "sucrase": "^3.21.0"
   },
   "engines": {
     "node": "14.x || 16.x",
@@ -53,6 +64,7 @@
     "@financial-times/o-colors": "^6.4.2",
     "@financial-times/o-header": "^10.0.1",
     "@financial-times/o-icons": "^7.4.0",
+    "@financial-times/o-tracking": "^4.3.2",
     "@financial-times/o-typography": "^7.3.2",
     "@financial-times/o-visual-effects": "^4.2.0",
     "@financial-times/o-utils": "^2.1.1"
