@@ -15,11 +15,12 @@ $system-code: 'n-myft-dropdown';
 .o-header__top-column--right--myft-dropdown{
 
 	@include oGridRespondTo($from: M) {
-		position: relative;
+		position: absolute;
 	}
 	// this class needs to be *= as there can be a trailing space in the name
 	button[class*="o-header__top-icon-link o-header__top-icon-link--myft"] {
 		margin: 8px 0;
+		display: block;
 
 		@include oGridRespondTo($from: M) {
 			padding: 0%;
@@ -45,18 +46,7 @@ $system-code: 'n-myft-dropdown';
 					margin-left: -5px;
 				}
 			}
-		
-			.header-top-link-myft-dropdown--expanded {
-				margin-right: -20px;
-				width: calc(100vw + 20px);
-		
-				@include oGridRespondTo($from: M) {
-					margin-top: -2px;
-					margin-right: 0;
-					width: 164px;
-					}
-				}
-			}
+		}
 
 		.o-icons-icon--arrow-down {
 			@include oIconsContent (
@@ -71,79 +61,95 @@ $system-code: 'n-myft-dropdown';
 			transform: rotate(180deg);
 		}
 
-		.header-top-link-myft-dropdown {
-			position: absolute;
-			height: 0;
-			overflow: hidden;
-		}
 		
-		.header-top-link-myft-dropdown--expanded {
-		
-			@include oGridRespondTo($from: M) {
-				margin-top: -4px;
-			}
-		
-			height: 222px;
-			width: 100vw;
-			box-sizing: border-box;
-		
-			background: oColorsByName('white-80');
-			box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
-			border-radius: 0px 0px 5px 5px;
-		
-			padding: 20px;
-		
-			z-index: 2;
-			margin-top: -2px;
-			display: block;
-			right: 0;
-			text-transform: none;
-		
-			transition: height 0.2s $o-visual-effects-timing-slide;
-		
-			@include oGridRespondTo($from: M) {
-				width: 164px;
-				padding: 20px;
-				left: unset;
-				transition: none;
-			}
-		
-			.n-myft-dropdown-menu {
-				list-style-type:none;
-				padding-inline-start: unset;
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				justify-content: space-between;
-				height: 182px;
-				margin: 0;
-		
-				li {
-					text-align:left;
-		
-					top: 100px;
-					left: 20px;
-					right: 20px;
-		
-					a {
-						text-decoration-line: unset;
-						font-family: 'MetricWeb';
-						@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
-						color: oColorsByName('black-60');
-						flex: none;
-						order: 0;
-						flex-grow: 0;
-					}
-		
-					a:hover {
-						border-bottom: 2px solid oColorsByName('black-80');;
-					}
-				}
-			}
-		}
-
 		&::after {
 			display: none;
 		}
 	}
+
+	.header-top-link-myft-dropdown {
+		position: absolute;
+		top: 100%;
+		height: 0;
+		overflow: hidden;
+	}
+
+	.header-top-link-myft-dropdown--expanded {
+		display: block;
+
+		@include oGridRespondTo($from: M) {
+			margin-top: -7px;
+		}
+
+		height: 222px;
+		width: 100vw;
+		box-sizing: border-box;
+
+		background: oColorsByName('white-80');
+		box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+		border-radius: 0px 0px 5px 5px;
+
+		padding: 20px;
+
+		z-index: 2;
+		margin-top: -9px;
+		display: block;
+		right: 0;
+		text-transform: none;
+
+		transition: height 0.2s $o-visual-effects-timing-slide;
+
+		@include oGridRespondTo($from: M) {
+			width: 164px;
+			padding: 20px;
+			left: unset;
+			transition: none;
+		}
+
+		.n-myft-dropdown-menu {
+			list-style-type:none;
+			padding-inline-start: unset;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			height: 182px;
+			margin: 0;
+
+			li {
+				text-align:left;
+
+				top: 100px;
+				left: 20px;
+				right: 20px;
+
+				a {
+					text-decoration-line: unset;
+					font-family: 'MetricWeb';
+					@include oTypographySans($scale: 0, $style: 'normal', $weight: 'regular');
+					color: oColorsByName('black-60');
+					flex: none;
+					order: 0;
+					flex-grow: 0;
+				}
+
+				a:hover {
+					border-bottom: 2px solid oColorsByName('black-80');;
+				}
+			}
+		}
+	}
+
+	.o-header__top-icon-link--myft-large-header {
+
+		+.header-top-link-myft-dropdown--expanded {
+			margin-right: -20px;
+			width: calc(100vw + 20px);
+
+			@include oGridRespondTo($from: M) {
+				margin-right: 0;
+				width: 164px;
+				}
+			}
+		}
 }

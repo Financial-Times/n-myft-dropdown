@@ -5,7 +5,7 @@ function detectlargeHeader() {
 	return largeLogo.length > 0;
 }
 
-function attachDropdown() {
+function attachButton() {
 	const button = document.createElement('button');
 
 	button.classList.add(
@@ -21,6 +21,12 @@ function attachDropdown() {
 	button.innerHTML = fallbackMarkup.trim();
 	button.setAttribute('data-trackable', 'myft-dropdown-open');
 	button.setAttribute('data-trackable-context-text', 'myFT');
+	button.ariaHasPopup = true;
+
+	return button;
+}
+
+function attachDropdown() {
 	const dropdownMarkup = `
 		<ul class="n-myft-dropdown-menu" onclick=event.stopPropagation() role="menu">
 			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following" tabindex="-1" data-trackable="myft-dropdown-topic-feed">Topic Feed</a></li>
@@ -30,12 +36,10 @@ function attachDropdown() {
 			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts" tabindex="-1" data-trackable="myft-dropdown-contact-preferences">Contact Preferences</a></li>
 		</ul>`;
 	const dropdown = document.createElement('span');
-	dropdown.classList.add('header-top-link-myft-dropdown');
-	button.ariaHasPopup = true;
 	dropdown.innerHTML = dropdownMarkup.trim();
-	button.appendChild(dropdown);
+	dropdown.classList.add('header-top-link-myft-dropdown');
 
-	return button;
+	return dropdown;
 }
 
 function setExpandedAttributes(button, expanded) {
@@ -50,7 +54,7 @@ function setExpandedAttributes(button, expanded) {
 	} else {
 		arrow.classList.remove('o-icons-icon--arrow-down--rotated');
 	}
-	const linkItems = button.querySelectorAll('a');
+	const linkItems = button.nextElementSibling.querySelectorAll('a');
 	const tabValue = expanded ? 0 : -1;
 	linkItems.forEach((item) => {
 		item.setAttribute('tabindex', tabValue);
@@ -60,24 +64,23 @@ function setExpandedAttributes(button, expanded) {
 function handleMoveIn(event) {
 	clearTimeout(timeoutIds[event.target.id]);
 }
-
 function closeDropdown(menu) {
-	clearTimeout(timeoutIds[menu.parentElement.id]);
+	clearTimeout(timeoutIds[menu.id]);
 	menu.classList.remove('header-top-link-myft-dropdown--expanded');
-	setExpandedAttributes(menu.parentElement, false);
+	setExpandedAttributes(menu.previousElementSibling, false);
 	document.body.removeEventListener('click', handleClickOutside);
-	menu.parentElement.removeEventListener('mouseleave', handleMoveOut);
-	menu.parentElement.removeEventListener('touchend', handleMoveOut);
+	menu.removeEventListener('mouseleave', handleMoveOut);
+	menu.removeEventListener('touchend', handleMoveOut);
 }
 
 function openDropdown(menu) {
 	menu.classList.add('header-top-link-myft-dropdown--expanded');
-	setExpandedAttributes(menu.parentElement, true);
+	setExpandedAttributes(menu.previousElementSibling, true);
 	document.body.addEventListener('click', handleClickOutside);
-	menu.parentElement.addEventListener('mouseleave', handleMoveOut);
-	menu.parentElement.addEventListener('mouseenter', handleMoveIn);
-	menu.parentElement.addEventListener('touchend', handleMoveOut);
-	menu.parentElement.addEventListener('touchstart', handleMoveIn, {
+	menu.addEventListener('mouseleave', handleMoveOut);
+	menu.addEventListener('mouseenter', handleMoveIn);
+	menu.addEventListener('touchend', handleMoveOut);
+	menu.addEventListener('touchstart', handleMoveIn, {
 		passive: true,
 	});
 }
@@ -100,12 +103,11 @@ function handleMoveOut() {
 		'.header-top-link-myft-dropdown--expanded'
 	);
 	Object.values(myFtDropdownMenus).forEach((menu) => {
-		const buttonId = menu.parentElement.id;
 		function onMoveOut() {
 			dispatchTrackingEvent({ action: 'moveOut' });
 			closeDropdown(menu);
 		}
-		timeoutIds[buttonId] = setTimeout(onMoveOut, 3000);
+		timeoutIds[menu.id] = setTimeout(onMoveOut, 3000);
 	});
 }
 
@@ -117,16 +119,17 @@ function addToggleEventHandler() {
 	Object.values(buttons).forEach((button) => {
 		button.addEventListener('click', function (event) {
 			event.preventDefault();
-			button.id = Math.floor(Math.random() * 10);
-			const expanded = button.querySelector(
+			const menu = button.nextElementSibling;
+			menu.id = Math.floor(Math.random() * 10);
+			const expanded = button.parentElement.querySelector(
 				'.header-top-link-myft-dropdown--expanded'
 			);
 			dispatchTrackingEvent({ action: expanded ? 'close' : 'open' });
 			if (!expanded) {
 				event.stopPropagation();
-				openDropdown(button.lastChild, button.id);
+				openDropdown(menu);
 			} else {
-				closeDropdown(button.lastChild, button.id);
+				closeDropdown(menu);
 			}
 		});
 	});
@@ -136,9 +139,10 @@ function addMyFtDropDown() {
 	const topColumnsRight = document.getElementsByClassName(
 		'o-header__top-column o-header__top-column--right'
 	);
+	const myFtButton = attachButton();
 	const myFtDropdown = attachDropdown();
 	Object.values(topColumnsRight).forEach((elem) => {
-		elem.appendChild(myFtDropdown.cloneNode(true));
+		elem.append(myFtButton.cloneNode(true), myFtDropdown.cloneNode(true));
 		elem.classList.add('o-header__top-column--right--myft-dropdown');
 	});
 }
