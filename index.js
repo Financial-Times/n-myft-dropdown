@@ -29,11 +29,11 @@ function attachButton() {
 function attachDropdown() {
 	const dropdownMarkup = `
 		<ul class="n-myft-dropdown-menu" onclick=event.stopPropagation() role="menu">
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/following" tabindex="-1" data-trackable="myft-dropdown-topic-feed">Topic Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/saved-articles" tabindex="-1" data-trackable="myft-dropdown-saved-articles">Saved Articles</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/explore" tabindex="-1" data-trackable="myft-dropdown-explore-feed">Explore Feed</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/newsletters" tabindex="-1" data-trackable="myft-dropdown-newsletters">Newsletters</a></li>
-			<li class="n-myft-dropdown-list" role="menuitem"><a href="/myft/alerts" tabindex="-1" data-trackable="myft-dropdown-contact-preferences">Contact Preferences</a></li>
+			<li class="n-myft-dropdown-list" role="none"><a href="/myft/following" tabindex="-1" data-trackable="myft-dropdown-topic-feed" role="menuitem">Topic Feed</a></li>
+			<li class="n-myft-dropdown-list" role="none"><a href="/myft/saved-articles" tabindex="-1" data-trackable="myft-dropdown-saved-articles" role="menuitem">Saved Articles</a></li>
+			<li class="n-myft-dropdown-list" role="none"><a href="/myft/explore" tabindex="-1" data-trackable="myft-dropdown-explore-feed" role="menuitem">Explore Feed</a></li>
+			<li class="n-myft-dropdown-list" role="none"><a href="/newsletters" tabindex="-1" data-trackable="myft-dropdown-newsletters" role="menuitem">Newsletters</a></li>
+			<li class="n-myft-dropdown-list" role="none"><a href="/myft/alerts" tabindex="-1" data-trackable="myft-dropdown-contact-preferences" role="menuitem">Contact Preferences</a></li>
 		</ul>`;
 	const dropdown = document.createElement('span');
 	dropdown.innerHTML = dropdownMarkup.trim();
