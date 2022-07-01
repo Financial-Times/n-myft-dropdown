@@ -5,8 +5,11 @@ $system-code: 'n-myft-dropdown';
 @import "@financial-times/o-colors/main";
 @include oColors();
 
+$o-typography-load-fonts: false;
 @import '@financial-times/o-typography/main';
-@include oTypography();
+@include oTypography((
+	'links': true,
+));
 
 @import '@financial-times/o-grid/main';
 @import '@financial-times/o-visual-effects/main';
