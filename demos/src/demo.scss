@@ -3,6 +3,9 @@ $system-code: 'n-myft-dropdown';
 @import '@financial-times/o-header/main';
 @include oHeader();
 
+@import '@financial-times/o-fonts/main';
+@include oFonts();
+
 @import '../../main';
 
 html {
