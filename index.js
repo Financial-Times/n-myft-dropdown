@@ -56,7 +56,10 @@ function setExpandedAttributes(button, expanded) {
 	}
 	const linkItems = button.nextElementSibling.querySelectorAll('a');
 	const tabValue = expanded ? 0 : -1;
-	linkItems.forEach((item) => {
+	linkItems.forEach((item, index) => {
+		if (index === 0 && expanded) {
+			item.focus();
+		}
 		item.setAttribute('tabindex', tabValue);
 	});
 }
